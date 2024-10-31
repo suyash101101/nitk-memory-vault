@@ -1,0 +1,36 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: NITKMemoryVault
+    network: sepolia
+    source:
+      address: "0x2B8ED95DdAE6645E403284E58C45BC01A7A99368"
+      abi: NITKMemoryVault
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Memory
+        - Approval
+        - ApprovalForAll
+        - OwnershipTransferred
+        - Transfer
+      abis:
+        - name: NITKMemoryVault
+          file: ./abis/NITKMemoryVault.json
+      eventHandlers:
+        - event: MemoryMinted(indexed uint256,indexed address,string,string,uint256)
+          handler: handleMemoryMinted
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/nitk-memory-vault.ts

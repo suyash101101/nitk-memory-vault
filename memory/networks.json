@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "NITKMemoryVault": {
+      "address": "0x2B8ED95DdAE6645E403284E58C45BC01A7A99368",
+      "startBlock": 0
+    }
+  }
+}
